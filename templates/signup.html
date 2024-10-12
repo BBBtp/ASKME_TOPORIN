@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+{% block title %}
+    <div class="d-flex gap-3 align-items-center mb-2">
+        <h2>Регистрация</h2>
+    </div>
+{% endblock %}
+{% block content %}
+    <form class="needs-validation" novalidate>
+        <div class="mb-3 row align-items-center">
+            <label for="validationServer01" class="col-sm-2 col-form-label"><h5>Логин</h5></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="validationServer01" placeholder="Введите логин..." required>
+                <div class="invalid-feedback">
+                    Введите логин
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+            <label for="validationServer02" class="col-sm-2 col-form-label"><h5>Почта</h5></label>
+            <div class="col-sm-8">
+                <input type="email" class="form-control" id="validationServer02" placeholder="example@mail.ru" required>
+                <div class="invalid-feedback">
+                    Введите почту
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+            <label for="validationServer03" class="col-sm-2 col-form-label"><h5>Никнейм</h5></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="validationServer03" placeholder="4eVap4ich" required>
+                <div class="invalid-feedback">
+                    Введите никнейм
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+            <label for="inputPassword" class="col-sm-2 col-form-label"><h5>Пароль</h5></label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="inputPassword1" required>
+                <div id="passwordHelpBlock" class="form-text">
+                    Ваш пароль должен состоять из 8-20 символов, содержать буквы и цифры, не должен содержать пробелов и
+                    эмоджи.
+                </div>
+                <div class="invalid-feedback">
+                    Пожалуйста, введите корректный пароль.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+            <label for="inputPasswordConfirm" class="col-sm-2 col-form-label"><h5>Повторить пароль</h5></label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="inputPasswordConfirm" required>
+                <div class="invalid-feedback">
+                    Пароли не совпадают.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+            <label for="validationAvatar" class="col-sm-2 col-form-label"><h5>Аватар</h5></label>
+            <div class="col-sm-8">
+                <input type="file" class="form-control" id="validationAvatar" aria-label="file example" required>
+                <div class="invalid-feedback">Картинка слишком большая</div>
+            </div>
+        </div>
+
+        <div class="mb-5 row align-items-center">
+            <label for="exampleInputDescription" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-8">
+                <button class="btn btn-success" id="liveAlertBtn">
+                    <div class="d-flex gap-2">
+                            <img src="/static/images/check-circle.svg" alt="Check icon"/>
+                            Регистрация
+                    </div>
+                </button>
+                
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block scripts %}
+    <script>
+        (() => {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+{% endblock %}
+</body>
+</html>

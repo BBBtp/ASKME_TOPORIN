@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+{% block title %}
+    <div class="d-flex gap-3 align-items-center mb-2">
+        <h2>Авторизация</h2>
+    </div>
+{% endblock %}
+{% block content %}
+    <form class="needs-validation" novalidate>
+        <div class="mb-3 row align-items-center">
+            <label for="validationServer02" class="col-sm-2 col-form-label"><h5>Почта</h5></label>
+            <div class="col-sm-8">
+                <input type="email" class="form-control" id="validationServer02" placeholder="example@mail.ru" required>
+            </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+            <label for="inputPassword" class="col-sm-2 col-form-label"><h5>Пароль</h5></label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="inputPassword1" required>
+            </div>
+        </div>
+
+        <div class="mb-3 row align-items-center">
+             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-8">
+                <a href="/signup/">Создать новый аккаунт</a>
+            </div>
+        </div>
+        <div class="mb-3 row align-items-center">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <button class="btn btn-success" type="submit">
+                    <div class="d-flex gap-2">
+                        <img src="/static/images/check-circle.svg" alt="Check icon"/>
+                        Вход
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Сообщение об ошибке -->
+        <div class="alert alert-danger d-none" id="error-message">
+            Неверная почта или пароль!
+        </div>
+    </form>
+{% endblock %}
+{% block scripts %}
+    <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    // Если форма не валидна, показать сообщение об ошибке
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        document.getElementById('error-message').classList.remove('d-none');
+                    } else {
+                        document.getElementById('error-message').classList.add('d-none');
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -17,6 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from questionnaire import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index, name='index'),  # Связываем URL с view
+    path('ask/', views.ask, name='ask'),
+    path('question/' , views.question, name='question'),
+    path('signup/', views.signup, name='signup'),
+    path('login/', views.login, name='login'),
+    path('settings/', views.settings, name='settings'),
+    path('tag/', views.tag, name='tag'),
 ]

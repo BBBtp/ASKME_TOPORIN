@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вопрос по тэгу</title>
+</head>
+<body>
+{% block title %}
+    <div class="d-flex gap-3 align-items-center mb-2">
+        <h2>Тэг: Linux</h2>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column gap-3">
+        <!-- Вопрос 1 -->
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="/static/images/chiefKeef.jpg" class="img-thumbnail rounded-circle medium-circle"
+                             alt="Avatar Image">
+                        <article class="mt-2">
+                            <div class="panel panel-default">
+                                <span class="d-flex justify-content-center">
+                                    <div class="me-2">
+                                        <img src="/static/images/like.png" class="small like-button"
+                                             style="cursor: pointer;">
+                                        <span class="badge text-bg-primary like-count">0</span>
+                                    </div>
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-10">
+                        <a href="/question/"><h5 class="card-title">Как установить Linux на Windows?</h5></a>
+                        <p class="card-text">Я пытаюсь установить Linux через dual boot, но система не отображает
+                            загрузчик. Как это исправить?</p>
+                        <div class="d-flex gap-5 align-items-center">
+                            <a href="#" class="card-link">Ответы(5)</a>
+                            <div class="d-flex gap-3">
+                                Тэги:
+                                <a href="#" class="card-link">Linux</a>
+                                <a href="#" class="card-link">Windows</a>
+                                <a href="#" class="card-link">Dual Boot</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" class="mt-4">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item"><a class="page-link" href="#">53</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('.like-button').on('click', function () {
+                var countElement = $(this).closest('.me-2').find('.like-count');
+                var currentCount = parseInt(countElement.text(), 10) || 0;
+                currentCount++;
+                countElement.text(currentCount);
+            });
+        });
+    </script>
+{% endblock %}
+</body>
+</html>
