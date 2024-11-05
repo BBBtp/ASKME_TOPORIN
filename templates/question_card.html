@@ -1,0 +1,36 @@
+{% load static %}
+
+    <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="/static/images/chiefKeef.jpg" class="img-thumbnail rounded-circle medium-circle"
+                             alt="Avatar Image">
+                        <article class="mt-2">
+                            <div class="panel panel-default">
+                                <span class="d-flex justify-content-center">
+                                    <div class="me-2">
+                                        <img src="/static/images/like.png" class="small like-button"
+                                             style="cursor: pointer;">
+                                        <span class="badge text-bg-primary like-count">0</span>
+                                    </div>
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-10">
+                        <a href={% url 'question' question_id=question.id %}><h5 class="card-title">{{question.title}}</h5></a>
+                        <p class="card-text">{{ question.text }}</p>
+                        <div class="d-flex gap-5 align-items-center">
+                            <a href="#" class="card-link">Ответы(5)</a>
+                            <div class="d-flex gap-3">
+                                Тэги:
+                                <a href="{% url 'tag' tag_name='Linux' %}" class="card-link">Linux</a>
+                                <a href="{% url 'tag' tag_name='Windows' %}" class="card-link">Windows</a>
+                                <a href="{% url 'tag' tag_name='Dual Boot' %}" class="card-link">Dual Boot</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

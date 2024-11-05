@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-header text-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href={% url 'index' %}>
             <h1 class="text-white">AskVK</h1>
         </a>
 
@@ -26,7 +26,7 @@
         <div class="d-flex gap-2">
             <div class="d-flex align-items-center">
                 <button class="btn btn-success" type="submit">
-                    <a class="text-decoration-none custom-link" href="ask/">
+                        <a class="text-decoration-none custom-link" href={% url 'ask' %}>
                         <div class="d-flex gap-2">
                             <img src="/static/images/help-circle.svg" alt="Question icon"/>
                             Спроси
@@ -40,16 +40,16 @@
                     <h6 class="text-white">Богдан Топорин</h6>
                 </div>
                 <button class="btn btn-secondary" type="submit">
-                    <a class="text-decoration-none custom-settins" href="/settings/">
+                    <a class="text-decoration-none custom-settins" href={% url 'settings' %}>
                         <div class="d-flex gap-2">
-                            <img src="/static/images/settings.svg">
+                            <img src="/static/images/settings.svg" alt="Settings">
                             Настройки
                         </div>
                     </a>
                 </button>
                 <button class="btn btn-danger" id="logoutButton" type="button">
                     <div class="d-flex gap-2">
-                        <img src="/static/images/log-out.svg">
+                        <img src="/static/images/log-out.svg" alt="Logo">
                         Выйти
                     </div>
                 </button>
@@ -138,8 +138,8 @@
         // Заменяем кнопки "Настройки" и "Выйти" на "Войти" и "Регистрация"
         const userInfo = document.getElementById('userInfo');
         userInfo.innerHTML = `
-            <button class="btn btn-success" type="button"><a href="/login/" class="text-decoration-none custom-link">Войти</a></button>
-            <button class="btn btn-secondary" type="button"><a href="/signup/" class="text-decoration-none custom-link">Регистрация</a></button>
+            <button class="btn btn-success" type="button"><a href={% url 'login' %} class="text-decoration-none custom-link">Войти</a></button>
+            <button class="btn btn-secondary" type="button"><a href={% url 'signup' %} class="text-decoration-none custom-link">Регистрация</a></button>
         `;
     });
 </script>
