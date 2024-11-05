@@ -23,3 +23,6 @@ def settings(request):
 
 def tag(request):
     return render(request, 'tag.html')
+
+def hot(request):
+    return render(request, 'hot.html')

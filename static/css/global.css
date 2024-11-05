@@ -109,3 +109,22 @@ h2, h3, h4, h5, h6 {
     background-color: #457b9d;
     color: #fff;
 }
+
+.small-circle {
+            width: 75px;
+            height: 75px;
+            object-fit: cover; /
+            border: none;
+        }
+
+        .medium-circle {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border: none;
+        }
+
+        .small {
+            width: 14px;
+            height: 14px;
+        }

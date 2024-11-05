@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from tkinter.font import names
+
 from django.contrib import admin
 from django.urls import path
 
@@ -21,11 +23,13 @@ from questionnaire import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),  # Связываем URL с view
+    path('', views.index, name='index'),
     path('ask/', views.ask, name='ask'),
     path('question/' , views.question, name='question'),
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
     path('settings/', views.settings, name='settings'),
     path('tag/', views.tag, name='tag'),
+
+    path('hot/', views.hot, name='hot')
 ]
