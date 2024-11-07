@@ -3,39 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Вопрос по тэгу</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вопросы по тегу {{ tag }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-{% block title %}
-    <div class="d-flex gap-3 align-items-center mb-2">
-        <h2>Тэг: {{ tag}}</h2>
-    </div>
-{% endblock %}
-
 {% block content %}
-    <div class="d-flex flex-column gap-3">
-        {% for question in questions %}
-            {% include 'question_card.html' with question=question %}
-        {% empty %}
-            <p>Нет вопросов с этим тэгом.</p>
-        {% endfor %}
+    <div class="container mt-4">
+        <div class="d-flex gap-3 align-items-center mb-4">
+            <h2>Тег: {{ tag }}</h2>
+        </div>
+        <div class="d-flex flex-column gap-3">
+            {% for question in questions %}
+                {% include 'elements/question_card.html' with question=question %}
+            {% empty %}
+                <p>Нет вопросов с этим тегом.</p>
+            {% endfor %}
+        </div>
+        {% if has_questions %}
+            {% include 'elements/pagination.html' %}
+        {% endif %}
     </div>
-    {% if has_questions %}
-        {% include 'pagination.html' %}
-    {% endif %}
-{% endblock %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-{% block scripts %}
-    <script>
-        $(document).ready(function () {
-            $('.like-button').on('click', function () {
-                var countElement = $(this).closest('.me-2').find('.like-count');
-                var currentCount = parseInt(countElement.text(), 10) || 0;
-                currentCount++;
-                countElement.text(currentCount);
-            });
-        });
-    </script>
 {% endblock %}
 </body>
 </html>

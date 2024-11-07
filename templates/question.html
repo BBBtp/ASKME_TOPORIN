@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,33 +9,34 @@
 <body>
 {% block content %}
     <div class="row">
-        <div class="card w-100 border-0 " style="width: 18rem;">
+        <div class="card w-100 border-0" style="width: 18rem;">
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
-                        <img src="/static/images/chiefKeef.jpg" class="img-thumbnail rounded-circle medium-circle"
-                             alt="Avatar Image">
+                        <img src="{{ '/static/images/chiefKeef.jpg' }}"
+                             class="img-thumbnail rounded-circle medium-circle" alt="Avatar Image">
                         <article class="mt-2">
                             <div class="panel panel-default">
                                 <span class="d-flex justify-content-center">
                                     <div class="me-2">
-                                        <img src="/static/images/like.png" class="small like-button"
-                                             style="cursor: pointer;">
-                                        <span class="badge text-bg-primary like-count">0</span>
+                                        <img src="{% static 'images/like.png' %}" class="small like-button" style="cursor: pointer;">
+                                        <span class="badge text-bg-primary like-count">{{ question.likes.count }}</span>
                                     </div>
                                 </span>
                             </div>
                         </article>
                     </div>
                     <div class="col-10">
-                        <h5 class="card-title">{{ question.title }}</h5></a>
-                        <p class="card-text">{{question.text}}</p>
+                        <h5 class="card-title">{{ question.title }}</h5>
+                        <p class="card-text">{{ question.text }}</p>
                         <div class="d-flex gap-5 align-items-center">
                             <div class="d-flex gap-3">
                                 Тэги:
-                                <a href="/tag/" class="card-link">Linux</a>
-                                <a href="#" class="card-link">Windows</a>
-                                <a href="#" class="card-link">Dual Boot</a>
+                                {% for tag in question.tags.all %}
+                                    <a href="{% url 'tag' tag_name=tag.name %}" class="card-link">{{ tag.name }}</a>
+                                {% empty %}
+                                    <span class="text-muted">Нет тегов</span>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -44,23 +46,26 @@
     </div>
     <hr class="border-2">
     <div class="d-flex flex-column gap-3 mb-4">
-        {% for answer in answers %}
-            {% include 'answer_card.html' %}
+        {% for answer in question.answers.all %}
+            {% include 'elements/answer_card.html' with answer=answer %}
+        {% empty %}
+            <p class="text-muted">Нет ответов</p>
         {% endfor %}
     </div>
     <hr class="border-2"/>
-    <div class="col-sm-12 mb-3">
-        <textarea class="form-control" id="exampleInputDescription" rows="10"
-                  placeholder="Напиши свой ответ здесь..."></textarea>
-    </div>
+    <form>
+        <div class="col-sm-12 mb-3">
 
-    <button class="btn btn-success" type="submit">
-        <div class="d-flex gap-2">
-            <img src="/static/images/check-circle.svg" alt="Check icon"/>
-            Ответить
+                <textarea class="form-control" name="answer_text" rows="10" placeholder="Напиши свой ответ здесь..."></textarea>
+
         </div>
-
-    </button>
+        <button class="btn btn-success" type="submit">
+            <div class="d-flex gap-2">
+                <img src="{% static 'images/check-circle.svg' %}" alt="Check icon"/>
+                Ответить
+            </div>
+        </button>
+    </form>
 {% endblock %}
 </body>
 </html>

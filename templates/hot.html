@@ -3,24 +3,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Топ вопросы</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
+
 {% block title %}
-    <div class="d-flex gap-3 align-items-center mb-2">
-        <h2>Топ вопросы</h2>
-        <a href={% url 'index' %}>
-            Новые вопросы
-        </a>
-    </div>
+        <div class="d-flex gap-3 align-items-center mb-4">
+            <h2>Топ вопросы</h2>
+            <a href="{% url 'index' %}" >Новые вопросы</a>
+        </div>
 {% endblock %}
 {% block content %}
-    <div class="d-flex flex-column gap-3">
-       {% for question in questions %}
-            {% include 'question_card.html' %}
-        {% endfor %}
-    {% include 'pagination.html' %}
-    </div>
+    
+        <div class="d-flex flex-column gap-3">
+            {% for question in questions %}
+                {% include 'elements/question_card.html' with question=question %}
+            {% empty %}
+                <p>Нет вопросов для отображения.</p>
+            {% endfor %}
+        </div>
+        {% include 'elements/pagination.html' %}
+ 
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
 </body>
 </html>
