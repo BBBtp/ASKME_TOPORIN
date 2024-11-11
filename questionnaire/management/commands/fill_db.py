@@ -56,11 +56,12 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f'Создано {len(question_tag_links)} связей между вопросами и тегами.'))
 
         # Создание ответов
+        users = User.objects.all()
         answers = [
             Answer(
                 question=random.choice(questions),
                 text=f'Это текст ответа {i}.',
-                author=random.choice(User.objects.all())
+                author=random.choice(users)
             ) for i in range(ratio * 100)
         ]
         Answer.objects.bulk_create(answers)
@@ -68,7 +69,7 @@ class Command(BaseCommand):
 
         # Создание лайков к вопросам
         question_likes = [
-            QuestionLike(question=random.choice(questions), user=random.choice(User.objects.all()))
+            QuestionLike(question=random.choice(questions), user=random.choice(users))
             for _ in range(ratio * 200)
         ]
         QuestionLike.objects.bulk_create(question_likes, ignore_conflicts=True)
@@ -76,7 +77,7 @@ class Command(BaseCommand):
 
         # Создание лайков к ответам
         answer_likes = [
-            AnswerLike(answer=random.choice(answers), user=random.choice(User.objects.all()))
+            AnswerLike(answer=random.choice(answers), user=random.choice(users))
             for _ in range(ratio * 200)
         ]
         AnswerLike.objects.bulk_create(answer_likes, ignore_conflicts=True)
