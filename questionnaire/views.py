@@ -11,7 +11,7 @@ def ask(request):
     return render(request, 'ask.html')
 
 def index(request):
-    questions = Question.objects.all().order_by('-created_at')
+    questions = Question.objects.get_new_questions()
     page_obj = paginate_queryset(request, questions, 5)
     return render(request, 'index.html', {'questions': page_obj.object_list, 'page_obj': page_obj})
 
@@ -36,7 +36,7 @@ def tag(request, tag_name):
     return render(request, 'tag.html', {'questions': page_obj.object_list, 'page_obj': page_obj, 'tag': tag})
 
 def hot(request):
-    hot_questions = Question.objects.annotate(likes_count=Count('likes')).order_by('-likes_count')
+    hot_questions = Question.objects.get_hot_questions()
     page_obj = paginate_queryset(request, hot_questions, 5)
     return render(request, 'hot.html', {'questions': page_obj.object_list, 'page_obj': page_obj})
 
